@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsmSpy.CommandLine", "AsmSp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsmSpy.Visualizers", "AsmSpy.Visualizers\AsmSpy.Visualizers.csproj", "{88E0B1B2-2099-4B3D-A8D8-DF8EC6C29C10}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsmSpy.MSTask", "AsmSpy.MSTask\AsmSpy.MSTask.csproj", "{19E595F4-0F85-4070-8BB3-0AB231AF9404}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{88E0B1B2-2099-4B3D-A8D8-DF8EC6C29C10}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88E0B1B2-2099-4B3D-A8D8-DF8EC6C29C10}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{88E0B1B2-2099-4B3D-A8D8-DF8EC6C29C10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19E595F4-0F85-4070-8BB3-0AB231AF9404}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19E595F4-0F85-4070-8BB3-0AB231AF9404}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19E595F4-0F85-4070-8BB3-0AB231AF9404}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19E595F4-0F85-4070-8BB3-0AB231AF9404}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

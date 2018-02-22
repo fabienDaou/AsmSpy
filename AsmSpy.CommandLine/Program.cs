@@ -3,6 +3,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using AsmSpy.Core;
+using AsmSpy.Visualizers;
 using Microsoft.Extensions.CommandLineUtils;
 
 

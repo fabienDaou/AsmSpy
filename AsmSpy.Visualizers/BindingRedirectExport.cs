@@ -3,11 +3,10 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Xml;
 using AsmSpy.Core;
 
-namespace AsmSpy.CommandLine
+namespace AsmSpy.Visualizers
 {
     public class BindingRedirectExport : IDependencyVisualizer
     {
@@ -33,7 +32,7 @@ namespace AsmSpy.CommandLine
                 }
                 _logger.LogMessage(string.Format(CultureInfo.InvariantCulture, "Exported to file {0}", _exportFileName));
             }
-            catch (System.UnauthorizedAccessException uae)
+            catch (UnauthorizedAccessException uae)
             {
                 _logger.LogError(string.Format(CultureInfo.InvariantCulture, "Could not write file {0} due to error {1}", _exportFileName, uae.Message));
             }

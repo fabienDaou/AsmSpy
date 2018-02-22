@@ -1,4 +1,4 @@
-﻿namespace AsmSpy.Core
+﻿namespace AsmSpy.Visualizers
 {
     public interface IDependencyVisualizer
     {

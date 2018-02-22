@@ -120,6 +120,18 @@
   <data name="by" xml:space="preserve">
     <value> by </value>
   </data>
+  <data name="ConsoleVisualizer_VisualizeAssemblyReferenceInfo__0_" xml:space="preserve">
+    <value>{0}</value>
+  </data>
+  <data name="ConsoleVisualizer_VisualizeAssemblyReferenceInfo____0_" xml:space="preserve">
+    <value>  {0}</value>
+  </data>
+  <data name="ConsoleVisualizer_VisualizeAssemblyReferenceInfo______0_" xml:space="preserve">
+    <value>    {0}</value>
+  </data>
+  <data name="ConsoleVisualizer_Visualize__0_" xml:space="preserve">
+    <value>{0}</value>
+  </data>
   <data name="Detailing_only_conflicting_assembly_references" xml:space="preserve">
     <value>Detailing only conflicting assembly references.</value>
   </data>
@@ -137,17 +149,5 @@
   </data>
   <data name="Source_" xml:space="preserve">
     <value>Source: {0}</value>
-  </data>
-  <data name="ConsoleVisualizer_VisualizeAssemblyReferenceInfo____0_" xml:space="preserve">
-    <value>  {0}</value>
-  </data>
-  <data name="ConsoleVisualizer_VisualizeAssemblyReferenceInfo______0_" xml:space="preserve">
-    <value>    {0}</value>
-  </data>
-  <data name="ConsoleVisualizer_VisualizeAssemblyReferenceInfo__0_" xml:space="preserve">
-    <value>{0}</value>
-  </data>
-  <data name="ConsoleVisualizer_Visualize__0_" xml:space="preserve">
-    <value>{0}</value>
   </data>
 </root>

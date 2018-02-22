@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using AsmSpy.Core;
 
-namespace AsmSpy.CommandLine
+namespace AsmSpy.Visualizers
 {
     public class ConsoleVisualizer : IDependencyVisualizer
     {
@@ -43,13 +43,13 @@ namespace AsmSpy.CommandLine
         {
             if (_analyzerResult.AnalyzedFiles.Count <= 0)
             {
-                Console.WriteLine(AsmSpy_CommandLine.No_assemblies_files_found_in_directory);
+                Console.WriteLine(AsmSpy_Resources.No_assemblies_files_found_in_directory);
                 return;
             }
 
             if (OnlyConflicts)
             {
-                Console.WriteLine(AsmSpy_CommandLine.Detailing_only_conflicting_assembly_references);
+                Console.WriteLine(AsmSpy_Resources.Detailing_only_conflicting_assembly_references);
             }
 
             var assemblyGroups = _analyzerResult.Assemblies.Values.GroupBy(x => x.AssemblyName.Name);
@@ -86,9 +86,9 @@ namespace AsmSpy.CommandLine
                 }
 
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.Write(AsmSpy_CommandLine.Reference);
+                Console.Write(AsmSpy_Resources.Reference);
                 Console.ForegroundColor = GetMainNameColor(assemblyInfos);
-                Console.WriteLine(AsmSpy_CommandLine.ConsoleVisualizer_Visualize__0_, assemblyGroup.Key);
+                Console.WriteLine(AsmSpy_Resources.ConsoleVisualizer_Visualize__0_, assemblyGroup.Key);
 
                 foreach (var assemblyInfo in assemblyInfos)
                 {
@@ -144,14 +144,14 @@ namespace AsmSpy.CommandLine
                     statusColor = AssemblyUnknownColor;
                     break;
                 default:
-                    throw new InvalidEnumArgumentException(AsmSpy_CommandLine.Invalid_AssemblySource);
+                    throw new InvalidEnumArgumentException(AsmSpy_Resources.Invalid_AssemblySource);
             }
             Console.ForegroundColor = statusColor;
-            Console.WriteLine(AsmSpy_CommandLine.ConsoleVisualizer_VisualizeAssemblyReferenceInfo____0_, assemblyReferenceInfo.AssemblyName);
-            Console.Write(AsmSpy_CommandLine.Source_, assemblyReferenceInfo.AssemblySource);
+            Console.WriteLine(AsmSpy_Resources.ConsoleVisualizer_VisualizeAssemblyReferenceInfo____0_, assemblyReferenceInfo.AssemblyName);
+            Console.Write(AsmSpy_Resources.Source_, assemblyReferenceInfo.AssemblySource);
             if (assemblyReferenceInfo.AssemblySource != AssemblySource.NotFound)
             {
-                Console.WriteLine(AsmSpy_CommandLine.Location_, assemblyReferenceInfo.ReflectionOnlyAssembly.Location);
+                Console.WriteLine(AsmSpy_Resources.Location_, assemblyReferenceInfo.ReflectionOnlyAssembly.Location);
             }
             else
             {
@@ -166,13 +166,13 @@ namespace AsmSpy.CommandLine
                 }
 
                 Console.ForegroundColor = statusColor;
-                Console.Write(AsmSpy_CommandLine.ConsoleVisualizer_VisualizeAssemblyReferenceInfo______0_, assemblyReferenceInfo.AssemblyName.Version);
+                Console.Write(AsmSpy_Resources.ConsoleVisualizer_VisualizeAssemblyReferenceInfo______0_, assemblyReferenceInfo.AssemblyName.Version);
 
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.Write(AsmSpy_CommandLine.by);
+                Console.Write(AsmSpy_Resources.by);
 
                 Console.ForegroundColor = ConsoleColor.Gray;
-                Console.WriteLine(AsmSpy_CommandLine.ConsoleVisualizer_VisualizeAssemblyReferenceInfo__0_, referer.AssemblyName);
+                Console.WriteLine(AsmSpy_Resources.ConsoleVisualizer_VisualizeAssemblyReferenceInfo__0_, referer.AssemblyName);
             }
         }
 

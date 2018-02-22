@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 using AsmSpy.Core;
 
-namespace AsmSpy.CommandLine
+namespace AsmSpy.Visualizers
 {
     public class DgmlExport : IDependencyVisualizer
     {

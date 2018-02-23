@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{19E595F4-0F85-4070-8BB3-0AB231AF9404}</ProjectGuid>
+    <ProjectGuid>{D1713F1A-B1D5-4DA4-A30B-8BF3D04D585A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AsmSpy.MSTask</RootNamespace>
-    <AssemblyName>AsmSpy.MSTask</AssemblyName>
+    <RootNamespace>AsmSpy.Filters</RootNamespace>
+    <AssemblyName>AsmSpy.Filters</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -31,25 +31,25 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Build.Utilities.v4.0" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BlackholeLogger.cs" />
-    <Compile Include="DetectDllConflicts.cs" />
-    <Compile Include="MsBuildLogger.cs" />
+    <Compile Include="IFilter.cs" />
+    <Compile Include="NetStandardFilter.cs" />
+    <Compile Include="NotFoundOnlyFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AsmSpy.Core\AsmSpy.Core.csproj">
       <Project>{5acc768b-f9f7-4472-9ab9-2543e32fd1ed}</Project>
       <Name>AsmSpy.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AsmSpy.Filters\AsmSpy.Filters.csproj">
-      <Project>{d1713f1a-b1d5-4da4-a30b-8bf3d04d585a}</Project>
-      <Name>AsmSpy.Filters</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

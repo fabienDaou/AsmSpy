@@ -37,7 +37,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BlackholeLogger.cs" />
     <Compile Include="DetectDllConflicts.cs" />
     <Compile Include="MsBuildLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

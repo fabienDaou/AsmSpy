@@ -14,6 +14,7 @@ namespace AsmSpy.MSTask
         private ILogger logger;
 
         public string Directory { get; set; }
+        public bool IncludeSubDirectories { get; set; }
 
         public bool NotFoundOnly { get; set; }
         public bool IgnoreNetStandard { get; set; }
@@ -39,11 +40,12 @@ namespace AsmSpy.MSTask
             return true;
         }
 
-        private static IEnumerable<FileInfo> GetFilesToAnalyze(DirectoryInfo directoryInfo)
+        private IEnumerable<FileInfo> GetFilesToAnalyze(DirectoryInfo directoryInfo)
         {
+            var configuredSearchOption = IncludeSubDirectories ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
             return directoryInfo
-                .GetFiles("*.dll", SearchOption.AllDirectories)
-                .Concat(directoryInfo.GetFiles("*.exe", SearchOption.AllDirectories));
+                .GetFiles("*.dll", configuredSearchOption)
+                .Concat(directoryInfo.GetFiles("*.exe", configuredSearchOption));
         }
 
         private IDependencyAnalyzerResult ApplyFilters(IDependencyAnalyzerResult result)

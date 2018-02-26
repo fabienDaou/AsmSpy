@@ -18,6 +18,7 @@ namespace AsmSpy.MSTask
 
         public bool NotFoundOnly { get; set; }
         public bool IgnoreNetStandard { get; set; }
+        public bool IgnoreSystem { get; set; }
 
         public override bool Execute()
         {
@@ -68,33 +69,34 @@ namespace AsmSpy.MSTask
 
             foreach (IGrouping<string, AssemblyReferenceInfo> assemblyGroup in orderedAssemblyGroups)
             {
-                if (LooksLikeMscorlib(assemblyGroup.Key) || LooksLikeSystemDll(assemblyGroup.Key))
+                if (!ShouldAssemblyBeIgnored(assemblyGroup.Key))
                 {
-                    continue;
-                }
-
-                List<AssemblyReferenceInfo> assemblyInfos = assemblyGroup.OrderBy(x => x.AssemblyName.ToString()).ToList();
-                if (assemblyInfos.Count <= 1)
-                {
-                    if (assemblyInfos.Count == 1 && assemblyInfos[0].AssemblySource == AssemblySource.Local)
+                    List<AssemblyReferenceInfo> assemblyInfos =
+                        assemblyGroup.OrderBy(x => x.AssemblyName.ToString()).ToList();
+                    if (assemblyInfos.Count <= 1)
                     {
-                        continue;
+                        if (assemblyInfos.Count == 1 && assemblyInfos[0].AssemblySource == AssemblySource.Local)
+                        {
+                            continue;
+                        }
+
+                        if (assemblyInfos.Count <= 0)
+                        {
+                            continue;
+                        }
                     }
 
-                    if (assemblyInfos.Count <= 0)
-                    {
-                        continue;
-                    }
+                    logger.LogWarning($"Reference \"{assemblyGroup.Key}\" could not be resolved. ");
+                    dllNotFound = true;
                 }
-
-                logger.LogWarning($"Reference \"{assemblyGroup.Key}\" could not be resolved. ");
-                dllNotFound = true;
             }
 
             return dllNotFound;
         }
 
-        private static bool LooksLikeSystemDll(string assemblyName) => Compare(assemblyName, "SYSTEM");
+        private bool ShouldAssemblyBeIgnored(string assemblyName) => IgnoreSystem && (LooksLikeMscorlib(assemblyName) || LooksLikeSystem(assemblyName));
+
+        private static bool LooksLikeSystem(string assemblyName) => Compare(assemblyName, "SYSTEM");
 
         private static bool LooksLikeMscorlib(string assemblyName) => Compare(assemblyName, "MSCORLIB");
 

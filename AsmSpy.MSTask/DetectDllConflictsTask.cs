@@ -9,7 +9,7 @@ using AsmSpy.Filters;
 
 namespace AsmSpy.MSTask
 {
-    public class DetectDllConflicts : Task
+    public class DetectDllConflictsTask : Task
     {
         private ILogger logger;
 

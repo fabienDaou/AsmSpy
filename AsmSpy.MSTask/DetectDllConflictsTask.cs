@@ -14,7 +14,7 @@ namespace AsmSpy.MSTask
         private ILogger logger;
 
         public string Directory { get; set; }
-        public bool IncludeSubDirectories { get; set; }
+        public bool IgnoreSubDirectories { get; set; }
 
         public bool NotFoundOnly { get; set; }
         public bool IgnoreNetStandard { get; set; }
@@ -42,7 +42,7 @@ namespace AsmSpy.MSTask
 
         private IEnumerable<FileInfo> GetFilesToAnalyze(DirectoryInfo directoryInfo)
         {
-            var configuredSearchOption = IncludeSubDirectories ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
+            var configuredSearchOption = IgnoreSubDirectories ? SearchOption.TopDirectoryOnly : SearchOption.AllDirectories;
             return directoryInfo
                 .GetFiles("*.dll", configuredSearchOption)
                 .Concat(directoryInfo.GetFiles("*.exe", configuredSearchOption));

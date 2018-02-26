@@ -32,7 +32,7 @@ namespace AsmSpy.MSTask
             IDependencyAnalyzerResult analyzerResult = new DependencyAnalyzer(fileList).Analyze(logger);
             var filteredAnalyzerResult = ApplyFilters(analyzerResult);
 
-            if (HasDllConflicts(filteredAnalyzerResult))
+            if (HasNotFoundAssembly(filteredAnalyzerResult))
             {
                 logger.LogError($"Some dll references could not be found. Run \"AsmSpy {Directory} -s -i -n\", and check the red entries for more info.");
                 return false;
@@ -59,7 +59,7 @@ namespace AsmSpy.MSTask
             return result;
         }
 
-        private bool HasDllConflicts(IDependencyAnalyzerResult result)
+        private bool HasNotFoundAssembly(IDependencyAnalyzerResult result)
         {
             var dllNotFound = false;
 

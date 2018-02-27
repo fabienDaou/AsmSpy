@@ -5,6 +5,17 @@ AsmSpy
 
 A simple command line tool to view assembly references.
 
+A MS task to detect not found dll at build time.
+
+## MSTask parameters
+| Parameters | Default values |
+| --- | --- |
+| Directory | Empty |
+| IgnoreSubDirectories | false |
+| NotFoundOnly | false |
+| IgnoreNetStandard | false |
+| IgnoreSystem | false |
+
 ## Install 
 
 Install [from Chocolatey package](https://chocolatey.org/packages/asmspy):

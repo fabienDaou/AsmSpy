@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>AsmSpy.MSTask</id>
+    <title>AsmSpy.MSTask</title>
+    <version>1.0.0</version>
+    <authors>Mike Hadlow, Fabien Daoulas</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>MSTask to detect not found assemblies at build time (detect version conflicts and such).</description>
+	<requireLicenseAcceptance>false</requireLicenseAcceptance>
+  </metadata>
+</package>

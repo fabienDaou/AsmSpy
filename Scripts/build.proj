@@ -1,0 +1,80 @@
+<!--
+Dependencies: 
+MSBuild Community Tasks https://github.com/loresoft/msbuildtasks
+MSBuild Community Tasks must be available before this script is executed.
+Pending a new release containing an addition required by this build script the following installer
+should be used: at least https://github.com/loresoft/msbuildtasks/releases/tag/1.4.0.128 (pre release)
+
+NuGet
+Using NuGet.exe from the .nuget folder in this project.
+-->
+
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <!--MSBuildCommunityTasks installed using installer (applicable for build server)-->
+        <MSBuildCommunityTasksPath Condition="Exists('$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets')">$(MSBuildExtensionsPath)\MSBuildCommunityTasks</MSBuildCommunityTasksPath>
+        <!--MSBuildCommunityTasks installed with NuGet-->
+        <MSBuildCommunityTasksPath Condition="Exists('$(MSBuildProjectDirectory)\.build\MSBuild.Community.Tasks.Targets')">$(MSBuildProjectDirectory)\.build</MSBuildCommunityTasksPath>
+    </PropertyGroup>
+    <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets"/>
+
+    <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
+		<Platform Condition=" '$(Platform)' == '' ">any cpu</Platform>
+        <ProjectRoot>$(MSBuildStartupDirectory)</ProjectRoot>
+		<NugetOutputDirectory>$(MSBuildStartupDirectory)\.build</NugetOutputDirectory>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectFiles Include="$(ProjectRoot)\AsmSpy.sln">
+            <Properties>Configuration=$(Configuration);Platform=$(Platform)</Properties>
+        </ProjectFiles>
+    </ItemGroup>
+
+    <ItemGroup>
+        <NugetPackages Include="*.nupkg" />
+    </ItemGroup>
+
+    <Target Name="Clean">
+        <MSBuild Projects="@(ProjectFiles)" Targets="Clean" />
+    </Target>
+
+    <Target Name="RemoveBuildFolder">
+		<RemoveDir Directories="$(ProjectRoot)\.build" />  
+    </Target>
+
+    <Target Name="BuildNuGetPackage">
+        <NuGetPack ToolPath="$(ProjectRoot)\.nuget"
+          File="$(ProjectRoot)\AsmSpy.Core\AsmSpy.Core.csproj"
+          Properties="Configuration=$(Configuration);Platform=AnyCPU"
+		  BasePath="$(ProjectRoot)\AsmSpy.Core\bin\$(Configuration)"
+          IncludeReferencedProjects="True"
+          Symbols="True"
+          OutputDirectory="$(NugetOutputDirectory)"
+		  Version="$(AssemblyVersion)"
+		  Verbosity="detailed"/>
+        <NuGetPack ToolPath="$(ProjectRoot)\.nuget"
+          File="$(ProjectRoot)\AsmSpy.MSTask\AsmSpy.MSTask.csproj"
+          Properties="Configuration=$(Configuration);Platform=AnyCPU"
+		  BasePath="$(ProjectRoot)\AsmSpy.MSTask\bin\$(Configuration)"
+          IncludeReferencedProjects="True"
+          Symbols="True"
+          OutputDirectory="$(NugetOutputDirectory)"
+		  Version="$(AssemblyVersion)"
+		  Verbosity="detailed"/>
+    </Target>
+
+    <Target Name="Compile" DependsOnTargets="Clean">
+        <MSBuild Projects="@(ProjectFiles)" />
+    </Target>
+
+    <Target Name="Build">
+		<CallTarget Targets="RemoveBuildFolder" />
+        <NuGetRestore Solution="%(ProjectFiles.Identity)"
+                      Source="https://nuget.org/api/v2/"
+                      Verbosity="detailed" />
+
+        <CallTarget Targets="Compile" />
+        <CallTarget Targets="BuildNuGetPackage" />
+    </Target>
+</Project>
